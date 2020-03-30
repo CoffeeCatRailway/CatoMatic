@@ -1,5 +1,6 @@
 package coffeecatrailway.catomatic.command.commands;
 
+import coffeecatrailway.catomatic.CommandManager;
 import coffeecatrailway.catomatic.command.CommandContext;
 import coffeecatrailway.catomatic.command.ICommand;
 import me.duncte123.botcommons.messaging.EmbedUtils;
@@ -21,6 +22,7 @@ public class CatCommand implements ICommand {
             String url = doc.getElementsByTag("url").first().html();
             MessageEmbed embed = EmbedUtils.embedImage(url).setTitle("Catto").build();
             ctx.getChannel().sendMessage(embed).queue();
+            CommandManager.LOGGER.info("Loading cat...");
         });
     }
 

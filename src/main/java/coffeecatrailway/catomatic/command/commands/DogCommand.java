@@ -1,5 +1,6 @@
 package coffeecatrailway.catomatic.command.commands;
 
+import coffeecatrailway.catomatic.CommandManager;
 import coffeecatrailway.catomatic.command.CommandContext;
 import coffeecatrailway.catomatic.command.ICommand;
 import me.duncte123.botcommons.messaging.EmbedUtils;
@@ -21,6 +22,7 @@ public class DogCommand implements ICommand {
             String url = json.get("url").asText();
             MessageEmbed embed = EmbedUtils.embedImage(url).setTitle("Doggo").build();
             ctx.getChannel().sendMessage(embed).queue();
+            CommandManager.LOGGER.info("Loading dog...");
         });
     }
 
