@@ -28,6 +28,8 @@ public class CommandManager {
         addCommand(new HelpCommand(this));
         addCommand(new AvatarCommand());
         addCommand(new PingCommand());
+        addCommand(new CatCommand());
+        addCommand(new DogCommand());
 
         addCommand(new KickCommand());
 
