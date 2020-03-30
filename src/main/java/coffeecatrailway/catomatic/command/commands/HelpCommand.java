@@ -27,6 +27,8 @@ public class HelpCommand implements ICommand {
     public void handle(CommandContext ctx) {
         List<String> args = ctx.getArgs();
         TextChannel channel = ctx.getChannel();
+        CommandManager.LOGGER.info(ctx.getAuthor().getAsTag() + " needs help...");
+
         if (args.isEmpty()) {
             EmbedBuilder embed = new EmbedBuilder().setTitle("List of available commands:").setColor(new Color(0x00FF00));
 
@@ -61,7 +63,6 @@ public class HelpCommand implements ICommand {
                     + "Aliases: " + getAliases(command) + "").queue();
         } else
             channel.sendMessage(command.getHelp()).queue();
-        CommandManager.LOGGER.info(ctx.getAuthor().getAsTag() + " needs help...");
     }
 
     private EmbedBuilder getCategory(EmbedBuilder embed, HelpCategory category) {

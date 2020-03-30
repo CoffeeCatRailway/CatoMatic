@@ -1,4 +1,4 @@
-package coffeecatrailway.catomatic.command.commands;
+package coffeecatrailway.catomatic.command.commands.admin;
 
 import coffeecatrailway.catomatic.CommandManager;
 import coffeecatrailway.catomatic.command.CommandContext;

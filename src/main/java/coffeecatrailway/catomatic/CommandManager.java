@@ -3,6 +3,10 @@ package coffeecatrailway.catomatic;
 import coffeecatrailway.catomatic.command.CommandContext;
 import coffeecatrailway.catomatic.command.ICommand;
 import coffeecatrailway.catomatic.command.commands.*;
+import coffeecatrailway.catomatic.command.commands.admin.KickCommand;
+import coffeecatrailway.catomatic.command.commands.admin.ServerInfoCommand;
+import coffeecatrailway.catomatic.command.commands.admin.SysPingCommand;
+import coffeecatrailway.catomatic.command.commands.admin.UserInfoCommand;
 import coffeecatrailway.catomatic.command.commands.music.*;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import org.slf4j.Logger;
@@ -24,7 +28,6 @@ public class CommandManager {
     private final List<ICommand> commands = new ArrayList<>();
 
     public CommandManager() {
-        addCommand(new SysPingCommand());
         addCommand(new HelpCommand(this));
         addCommand(new AvatarCommand());
         addCommand(new PingCommand());
@@ -32,7 +35,10 @@ public class CommandManager {
         addCommand(new DogCommand());
         addCommand(new DiceCommand());
 
+        addCommand(new SysPingCommand());
         addCommand(new KickCommand());
+        addCommand(new UserInfoCommand());
+        addCommand(new ServerInfoCommand());
 
         addCommand(new JoinCommand());
         addCommand(new LeaveCommand());
