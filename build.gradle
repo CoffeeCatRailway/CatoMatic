@@ -6,7 +6,7 @@ plugins {
 
 mainClassName = 'coffeecatrailway.catomatic.Bot'
 
-version '`1.0'
+version '1.0'
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 
