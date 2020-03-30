@@ -30,6 +30,7 @@ public class CommandManager {
         addCommand(new PingCommand());
         addCommand(new CatCommand());
         addCommand(new DogCommand());
+        addCommand(new DiceCommand());
 
         addCommand(new KickCommand());
 
