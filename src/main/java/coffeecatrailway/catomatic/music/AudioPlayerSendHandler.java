@@ -9,7 +9,7 @@ import java.nio.ByteBuffer;
 /**
  * @author CoffeeCatRailway
  * Created: 30/03/2020
- *
+ * <p>
  * From: https://github.com/sedmelluq/lavaplayer/tree/master/demo-jda/src/main/java/com/sedmelluq/discord/lavaplayer/demo/jda
  * This is a wrapper around AudioPlayer which makes it behave as an AudioSendHandler for JDA. As JDA calls canProvide
  * before every call to provide20MsAudio(), we pull the frame in canProvide() and use the frame we already pulled in

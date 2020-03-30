@@ -2,11 +2,6 @@ package coffeecatrailway.catomatic.command.commands.music;
 
 import coffeecatrailway.catomatic.command.CommandContext;
 import coffeecatrailway.catomatic.command.ICommand;
-import coffeecatrailway.catomatic.music.GuildMusicManager;
-import coffeecatrailway.catomatic.music.PlayerManager;
-import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.entities.GuildVoiceState;
-import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.managers.AudioManager;

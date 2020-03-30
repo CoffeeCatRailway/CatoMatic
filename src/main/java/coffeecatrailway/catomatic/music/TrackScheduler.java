@@ -11,7 +11,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 /**
  * @author CoffeeCatRailway
  * Created: 30/03/2020
- *
+ * <p>
  * From: https://github.com/sedmelluq/lavaplayer/tree/master/demo-jda/src/main/java/com/sedmelluq/discord/lavaplayer/demo/jda
  * This class schedules tracks for the audio player. It contains the queue of tracks.
  */

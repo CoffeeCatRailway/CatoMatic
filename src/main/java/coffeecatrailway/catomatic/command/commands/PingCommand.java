@@ -40,6 +40,7 @@ public class PingCommand implements ICommand {
         List<User> mentionedUsers = ctx.getMessage().getMentionedUsers();
         User user = mentionedUsers.isEmpty() ? ctx.getAuthor() : mentionedUsers.get(0);
         CommandManager.LOGGER.info(ctx.getAuthor().getAsTag() + " is pinning " + user.getAsTag() + " " + pings + " times...");
+
         StringBuilder text = new StringBuilder();
         if (args.size() >= 3)
             for (int i = 2; i < args.size(); i++)

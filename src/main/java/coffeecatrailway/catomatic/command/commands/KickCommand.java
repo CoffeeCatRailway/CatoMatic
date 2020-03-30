@@ -1,16 +1,13 @@
 package coffeecatrailway.catomatic.command.commands;
 
 import coffeecatrailway.catomatic.CommandManager;
-import coffeecatrailway.catomatic.Config;
 import coffeecatrailway.catomatic.command.CommandContext;
 import coffeecatrailway.catomatic.command.ICommand;
-import com.sun.org.apache.xerces.internal.impl.XMLEntityScanner;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 
-import javax.xml.soap.Text;
 import java.util.List;
 
 /**

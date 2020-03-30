@@ -62,11 +62,11 @@ public class PlayCommand implements ICommand {
         manager.loadAndPlay(ctx.getChannel(), input);
     }
 
-    private boolean isUrl(String input)  {
+    private boolean isUrl(String input) {
         try {
             new URL(input);
             return true;
-        } catch (MalformedURLException e)  {
+        } catch (MalformedURLException e) {
             return false;
         }
     }

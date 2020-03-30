@@ -6,7 +6,7 @@ import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 /**
  * @author CoffeeCatRailway
  * Created: 30/03/2020
- *
+ * <p>
  * From: https://github.com/sedmelluq/lavaplayer/tree/master/demo-jda/src/main/java/com/sedmelluq/discord/lavaplayer/demo/jda
  * Holder for both the player and a track scheduler for one guild.
  */
@@ -22,6 +22,7 @@ public class GuildMusicManager {
 
     /**
      * Creates a player and a track scheduler.
+     *
      * @param manager Audio player manager to use for creating the player.
      */
     public GuildMusicManager(AudioPlayerManager manager) {
