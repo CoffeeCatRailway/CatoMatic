@@ -54,4 +54,9 @@ public class JoinCommand implements ICommand {
     public String getHelp() {
         return "Makes the bot join your channel";
     }
+
+    @Override
+    public HelpCategory getCategory() {
+        return HelpCategory.MUSIC;
+    }
 }

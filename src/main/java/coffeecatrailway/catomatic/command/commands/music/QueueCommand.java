@@ -61,4 +61,9 @@ public class QueueCommand implements ICommand {
     public String getHelp() {
         return "Shows the current queue";
     }
+
+    @Override
+    public HelpCategory getCategory() {
+        return HelpCategory.MUSIC;
+    }
 }

@@ -43,4 +43,9 @@ public class LeaveCommand implements ICommand {
     public String getHelp() {
         return "Makes the bot leave your channel";
     }
+
+    @Override
+    public HelpCategory getCategory() {
+        return HelpCategory.MUSIC;
+    }
 }

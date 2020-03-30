@@ -35,4 +35,9 @@ public class SkipCommand implements ICommand {
     public String getHelp() {
         return "Skip current song";
     }
+
+    @Override
+    public HelpCategory getCategory() {
+        return HelpCategory.MUSIC;
+    }
 }

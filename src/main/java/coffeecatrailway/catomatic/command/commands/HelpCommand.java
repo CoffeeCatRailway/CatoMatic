@@ -28,29 +28,61 @@ public class HelpCommand implements ICommand {
         List<String> args = ctx.getArgs();
         TextChannel channel = ctx.getChannel();
         if (args.isEmpty()) {
-            EmbedBuilder builder = new EmbedBuilder().setTitle("List of available commands:").setColor(new Color(0x00FF00));
-            manager.getCommands().forEach(cmd -> builder.appendDescription(Config.get("prefix") + cmd.getName() + "\n" + cmd.getHelp() + "\n\n"));
-            channel.sendMessage(builder.build()).queue();
+            EmbedBuilder embed = new EmbedBuilder().setTitle("List of available commands:").setColor(new Color(0x00FF00));
+
+            StringBuilder builder = new StringBuilder().append("Other categories: ");
+            Arrays.stream(HelpCategory.values()).map(HelpCategory::getName).forEach(name -> {
+                if (!name.equals(HelpCategory.NORMAL.getName()))
+                    builder.append("**").append(name).append("**, ");
+            });
+            String builderString = builder.toString();
+            builderString = builderString.substring(0, builderString.length() - 2);
+            embed.appendDescription(builderString + "\n\n");
+
+            channel.sendMessage(getCategory(embed, HelpCategory.NORMAL).build()).queue();
             return;
         }
 
         String search = args.get(0);
         ICommand command = manager.getCommand(search);
         if (command == null) {
-            channel.sendMessage("Nothing found for " + search).queue();
+            if (Arrays.stream(HelpCategory.values()).anyMatch(cat -> cat.getName().toLowerCase().equals(search.toLowerCase()))) {
+                HelpCategory category = HelpCategory.valueOf(search.toUpperCase());
+                EmbedBuilder embed = new EmbedBuilder().setTitle(String.format("List of available commands for **%s**:", category.getName())).setColor(new Color(0x00FF00));
+                channel.sendMessage(getCategory(embed, category).build()).queue();
+            } else {
+                channel.sendMessage("Nothing found for " + search).queue();
+            }
             return;
         }
 
         if (!command.getAliases().isEmpty()) {
-            StringBuilder builder = new StringBuilder();
-            for (String alias : command.getAliases())
-                builder.append(alias).append(", ");
-            String aliases = builder.toString();
             channel.sendMessage(command.getHelp() + "\n"
-                    + "Aliases: " + aliases.substring(0, aliases.length() - 2) + "").queue();
+                    + "Aliases: " + getAliases(command) + "").queue();
         } else
             channel.sendMessage(command.getHelp()).queue();
         CommandManager.LOGGER.info(ctx.getAuthor().getAsTag() + " needs help...");
+    }
+
+    private EmbedBuilder getCategory(EmbedBuilder embed, HelpCategory category) {
+        manager.getCommands().forEach(cmd -> {
+            if (cmd.getCategory() == category) {
+                embed.appendDescription(Config.get("prefix") + cmd.getName());
+                embed.appendDescription("\n" + cmd.getHelp());
+                if (!cmd.getAliases().isEmpty())
+                    embed.appendDescription("\n" + getAliases(cmd));
+                embed.appendDescription("\n\n");
+            }
+        });
+        return embed;
+    }
+
+    private String getAliases(ICommand command) {
+        StringBuilder builder = new StringBuilder();
+        for (String alias : command.getAliases())
+            builder.append(alias).append(", ");
+        String aliases = builder.toString();
+        return aliases.substring(0, aliases.length() - 2);
     }
 
     @Override

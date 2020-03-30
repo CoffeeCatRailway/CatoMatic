@@ -17,11 +17,31 @@ public interface ICommand {
 
     String getHelp();
 
+    default HelpCategory getCategory() {
+        return HelpCategory.NORMAL;
+    }
+
     default List<String> getAliases() {
         return Arrays.asList();
     }
 
     default String getPrefixedName() {
         return Config.get("prefix") + getName();
+    }
+
+    enum HelpCategory {
+        NORMAL("Normal"),
+        MUSIC("Music"),
+        ADMIN("Admin");
+
+        String name;
+
+        HelpCategory(String name) {
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
     }
 }

@@ -104,4 +104,9 @@ public class PlayCommand implements ICommand {
         return "Plays a song in a voice channel\n"
                 + "Usage: `" + getPrefixedName() + " <song url>`";
     }
+
+    @Override
+    public HelpCategory getCategory() {
+        return HelpCategory.MUSIC;
+    }
 }

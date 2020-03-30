@@ -27,4 +27,9 @@ public class SysPingCommand implements ICommand {
     public String getHelp() {
         return "Shows the current ping from the bot to the discord servers";
     }
+
+    @Override
+    public HelpCategory getCategory() {
+        return HelpCategory.ADMIN;
+    }
 }

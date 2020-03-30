@@ -35,4 +35,9 @@ public class StopCommand implements ICommand {
     public String getHelp() {
         return "Stop the current song playing";
     }
+
+    @Override
+    public HelpCategory getCategory() {
+        return HelpCategory.MUSIC;
+    }
 }

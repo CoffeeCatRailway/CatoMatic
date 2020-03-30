@@ -59,4 +59,9 @@ public class KickCommand implements ICommand {
         return "Kick a member off the server.\n"
                 + "Usage: `" + getPrefixedName() + " <@user> <reason>`";
     }
+
+    @Override
+    public HelpCategory getCategory() {
+        return HelpCategory.ADMIN;
+    }
 }

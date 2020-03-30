@@ -53,6 +53,11 @@ public class NowPlayingCommand implements ICommand {
     }
 
     @Override
+    public HelpCategory getCategory() {
+        return HelpCategory.MUSIC;
+    }
+
+    @Override
     public List<String> getAliases() {
         return Arrays.asList("nowplaying", "playing");
     }
