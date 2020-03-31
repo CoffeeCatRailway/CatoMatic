@@ -44,7 +44,7 @@ public class NowPlayingCommand implements ICommand {
 
     @Override
     public String getName() {
-        return "np";
+        return "nowplaying";
     }
 
     @Override
@@ -59,7 +59,7 @@ public class NowPlayingCommand implements ICommand {
 
     @Override
     public List<String> getAliases() {
-        return Arrays.asList("nowplaying", "playing");
+        return Arrays.asList("currentsong", "playing", "song");
     }
 
     private String formatTime(long timeInMillis) {

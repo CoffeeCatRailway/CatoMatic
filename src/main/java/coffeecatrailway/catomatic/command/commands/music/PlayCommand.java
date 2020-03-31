@@ -49,6 +49,11 @@ public class PlayCommand implements ICommand {
             JoinCommand.join(ctx);
 
         String input = String.join(" ", args);
+        if (args.get(0).equalsIgnoreCase("wtc") || args.get(0).equalsIgnoreCase("whythecrap")) {
+            input = "https://www.youtube.com/watch?v=9p7vlYwF6mU";
+        } else if (args.get(0).equalsIgnoreCase("rickroll")) {
+            input = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+        }
         if (!isUrl(input)) {
             String ytSearched = searchYouTube(input);
             if (ytSearched == null) {
