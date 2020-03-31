@@ -20,7 +20,7 @@ public class DogCommand implements ICommand {
     public void handle(CommandContext ctx) {
         WebUtils.ins.getJSONObject("https://random.dog/woof.json").async(json -> {
             String url = json.get("url").asText();
-            MessageEmbed embed = EmbedUtils.embedImage(url).setTitle("Doggo").build();
+            MessageEmbed embed = EmbedUtils.embedImage(url).setTitle("Doggo", url).build();
             ctx.getChannel().sendMessage(embed).queue();
             CommandManager.LOGGER.info("Loading dog...");
         });

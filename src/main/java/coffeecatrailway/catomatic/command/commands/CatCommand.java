@@ -20,7 +20,7 @@ public class CatCommand implements ICommand {
     public void handle(CommandContext ctx) {
         WebUtils.ins.scrapeWebPage("https://api.thecatapi.com/api/images/get?format=xml&results_per_page=1").async(doc -> {
             String url = doc.getElementsByTag("url").first().html();
-            MessageEmbed embed = EmbedUtils.embedImage(url).setTitle("Catto").build();
+            MessageEmbed embed = EmbedUtils.embedImage(url).setTitle("Catto", url).build();
             ctx.getChannel().sendMessage(embed).queue();
             CommandManager.LOGGER.info("Loading cat...");
         });
