@@ -13,9 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Pattern;
 
 /**
@@ -25,7 +23,7 @@ import java.util.regex.Pattern;
 public class CommandManager {
 
     public static final Logger LOGGER = LoggerFactory.getLogger(CommandManager.class);
-    private final List<ICommand> commands = new ArrayList<>();
+    private final Map<String, ICommand> commands = new HashMap<>();
 
     public CommandManager() {
         addCommand(new HelpCommand(this));
@@ -49,25 +47,25 @@ public class CommandManager {
         addCommand(new NowPlayingCommand());
     }
 
-    public void addCommand(ICommand cmd) {
-        boolean nameFound = this.commands.stream().anyMatch(command -> command.getName().equalsIgnoreCase(cmd.getName()));
+    public void addCommand(ICommand command) {
+        boolean nameFound = this.commands.keySet().stream().anyMatch(id -> id.equalsIgnoreCase(command.getName()));
         if (nameFound)
             throw new IllegalArgumentException("A command with this name is already present!");
 
-        commands.add(cmd);
+        this.commands.put(command.getName(), command);
     }
 
-    public List<ICommand> getCommands() {
-        return commands;
+    public Map<String, ICommand> getCommands() {
+        return this.commands;
     }
 
     @Nullable
     public ICommand getCommand(String search) {
         String searchLower = search.toLowerCase();
 
-        for (ICommand cmd : commands)
-            if (cmd.getName().equals(searchLower) || cmd.getAliases().contains(searchLower))
-                return cmd;
+        for (Map.Entry<String, ICommand> entry : this.commands.entrySet())
+            if (entry.getKey().equals(searchLower) || entry.getValue().getAliases().contains(searchLower))
+                return entry.getValue();
         return null;
     }
 

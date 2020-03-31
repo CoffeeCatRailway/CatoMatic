@@ -66,12 +66,12 @@ public class HelpCommand implements ICommand {
     }
 
     private EmbedBuilder getCategory(EmbedBuilder embed, HelpCategory category) {
-        manager.getCommands().forEach(cmd -> {
-            if (cmd.getCategory() == category) {
-                embed.appendDescription(Config.get("prefix") + cmd.getName());
-                embed.appendDescription("\n" + cmd.getHelp());
-                if (!cmd.getAliases().isEmpty())
-                    embed.appendDescription("\n" + getAliases(cmd));
+        manager.getCommands().forEach((id, command) -> {
+            if (command.getCategory() == category) {
+                embed.appendDescription(Config.get("prefix") + id);
+                embed.appendDescription("\n" + command.getHelp());
+                if (!command.getAliases().isEmpty())
+                    embed.appendDescription("\n" + getAliases(command));
                 embed.appendDescription("\n\n");
             }
         });
