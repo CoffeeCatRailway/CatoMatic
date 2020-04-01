@@ -1,5 +1,6 @@
 package coffeecatrailway.catomatic.command.commands.admin;
 
+import coffeecatrailway.catomatic.CommandManager;
 import coffeecatrailway.catomatic.Config;
 import coffeecatrailway.catomatic.command.CommandContext;
 import coffeecatrailway.catomatic.command.ICommand;
@@ -58,13 +59,17 @@ public class PurgeCommand implements ICommand {
             List<Message> goodMessages = messages.stream().filter(message -> message.getTimeCreated().isBefore(OffsetDateTime.now().plus(2, ChronoUnit.WEEKS))).collect(Collectors.toList());
             channel.purgeMessages(goodMessages);
             return goodMessages.size();
-        }).whenCompleteAsync((count, thr) ->
-            channel.sendMessageFormat("Deleted `%d` messages", count).queue(message -> message.delete().queueAfter(10, TimeUnit.SECONDS))
-        ).exceptionally(thr -> {
+        }).whenCompleteAsync((count, thr) -> {
+            String formatted = String.format("Deleted `%d` messages", count);
+            channel.sendMessage(formatted).queue(message -> message.delete().queueAfter(10, TimeUnit.SECONDS));
+            CommandManager.LOGGER.info(formatted);
+        }).exceptionally(thr -> {
             String cause = "";
             if (thr.getCause() != null)
                 cause = " caused by: " + thr.getCause().getMessage();
-            channel.sendMessageFormat("Error: %s%s", thr.getMessage(), cause).queue();
+            String formatted = String.format("Error: %s%s", thr.getMessage(), cause);
+            channel.sendMessage(formatted).queue();
+            CommandManager.LOGGER.info(formatted);
             return 0;
         });
     }
