@@ -18,7 +18,7 @@ public class JoinCommand implements ICommand {
     @Override
     public void handle(CommandContext ctx) {
         join(ctx);
-        ctx.getChannel().sendMessage("Joining you voice channel").queue();
+        ctx.getChannel().sendMessage("Joining your voice channel").queue();
     }
 
     public static void join(CommandContext ctx) {

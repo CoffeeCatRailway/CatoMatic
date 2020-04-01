@@ -1,5 +1,6 @@
 package coffeecatrailway.catomatic.command.commands.music;
 
+import coffeecatrailway.catomatic.CommandManager;
 import coffeecatrailway.catomatic.command.CommandContext;
 import coffeecatrailway.catomatic.command.ICommand;
 import coffeecatrailway.catomatic.music.GuildMusicManager;
@@ -29,7 +30,6 @@ public class QueueCommand implements ICommand {
 
         if (queue.isEmpty()) {
             channel.sendMessage("The queue is empty").queue();
-
             return;
         }
 
@@ -50,6 +50,7 @@ public class QueueCommand implements ICommand {
         }
 
         channel.sendMessage(builder.build()).queue();
+        CommandManager.LOGGER.info("Queue: " + builder.getDescriptionBuilder().toString());
     }
 
     @Override

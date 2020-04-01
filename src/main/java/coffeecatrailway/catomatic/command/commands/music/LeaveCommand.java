@@ -1,5 +1,6 @@
 package coffeecatrailway.catomatic.command.commands.music;
 
+import coffeecatrailway.catomatic.CommandManager;
 import coffeecatrailway.catomatic.command.CommandContext;
 import coffeecatrailway.catomatic.command.ICommand;
 import net.dv8tion.jda.api.entities.TextChannel;
@@ -31,7 +32,7 @@ public class LeaveCommand implements ICommand {
 
         audioManager.closeAudioConnection();
         channel.sendMessage("Disconnected from your channel").queue();
-
+        CommandManager.LOGGER.info("Disconnected from " + voiceChannel.getName());
     }
 
     @Override

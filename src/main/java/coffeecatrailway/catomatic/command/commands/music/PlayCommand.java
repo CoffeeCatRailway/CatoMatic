@@ -9,6 +9,7 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.youtube.YouTube;
 import com.google.api.services.youtube.model.SearchResult;
 import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.managers.AudioManager;
 
 import javax.annotation.Nullable;
@@ -47,6 +48,12 @@ public class PlayCommand implements ICommand {
         AudioManager audioManager = ctx.getGuild().getAudioManager();
         if (!audioManager.isConnected())
             JoinCommand.join(ctx);
+
+        VoiceChannel voiceChannel = audioManager.getConnectedChannel();
+        if (!voiceChannel.getMembers().contains(ctx.getMember())) {
+            channel.sendMessage("You have to be in the same voice channel as me to use this").queue();
+            return;
+        }
 
         String input = String.join(" ", args);
         if (args.get(0).equalsIgnoreCase("wtc") || args.get(0).equalsIgnoreCase("whythecrap")) {

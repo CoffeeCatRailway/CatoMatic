@@ -5,6 +5,8 @@ import coffeecatrailway.catomatic.command.ICommand;
 import coffeecatrailway.catomatic.music.GuildMusicManager;
 import coffeecatrailway.catomatic.music.PlayerManager;
 import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.VoiceChannel;
+import net.dv8tion.jda.api.managers.AudioManager;
 
 /**
  * @author CoffeeCatRailway
@@ -17,6 +19,17 @@ public class SkipCommand implements ICommand {
         TextChannel channel = ctx.getChannel();
         PlayerManager playerManager = PlayerManager.getInstance();
         GuildMusicManager musicManager = playerManager.getGuildMusicManager(ctx.getGuild());
+        AudioManager audioManager = ctx.getGuild().getAudioManager();
+        if (!audioManager.isConnected()) {
+            channel.sendMessage("I'm not connected to a voice channel").queue();
+            return;
+        }
+
+        VoiceChannel voiceChannel = audioManager.getConnectedChannel();
+        if (!voiceChannel.getMembers().contains(ctx.getMember())) {
+            channel.sendMessage("You have to be in the same voice channel as me to use this").queue();
+            return;
+        }
 
         if (musicManager.player.getPlayingTrack() == null) {
             channel.sendMessage("Nothing is currently playing").queue();
