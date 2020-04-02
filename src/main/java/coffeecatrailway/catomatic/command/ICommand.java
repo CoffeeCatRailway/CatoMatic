@@ -1,6 +1,6 @@
 package coffeecatrailway.catomatic.command;
 
-import coffeecatrailway.catomatic.Config;
+import coffeecatrailway.catomatic.CommandManager;
 
 import java.util.Arrays;
 import java.util.List;
@@ -26,7 +26,7 @@ public interface ICommand {
     }
 
     default String getPrefixedName() {
-        return Config.get("prefix") + getName();
+        return CommandManager.PREFIX + getName();
     }
 
     enum HelpCategory {

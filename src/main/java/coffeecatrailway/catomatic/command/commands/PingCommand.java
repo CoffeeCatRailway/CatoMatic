@@ -1,7 +1,6 @@
 package coffeecatrailway.catomatic.command.commands;
 
 import coffeecatrailway.catomatic.CommandManager;
-import coffeecatrailway.catomatic.Config;
 import coffeecatrailway.catomatic.command.CommandContext;
 import coffeecatrailway.catomatic.command.ICommand;
 import net.dv8tion.jda.api.entities.TextChannel;
@@ -14,6 +13,8 @@ import java.util.List;
  * Created: 30/03/2020
  */
 public class PingCommand implements ICommand {
+
+    private final int maxPings = 40, minPings = 1;
 
     @Override
     public void handle(CommandContext ctx) {
@@ -31,9 +32,9 @@ public class PingCommand implements ICommand {
             channel.sendMessage(getHelp()).queue();
             return;
         }
-        if (pings < 1) pings = 1;
-        if (pings > Integer.parseInt(Config.get("maxpings"))) {
-            channel.sendMessage("You can only ping a user up yo " + Config.get("maxpings") + " times").queue();
+        if (pings < minPings) pings = minPings;
+        if (pings > maxPings) {
+            channel.sendMessage("You can only ping a user up yo " + maxPings + " times").queue();
             return;
         }
 
@@ -58,6 +59,6 @@ public class PingCommand implements ICommand {
     @Override
     public String getHelp() {
         return "Pings a user some number of times\n"
-                + "Usage: `" + getPrefixedName() + " <ping amount | MAX:" + Config.get("maxpings") + "> [person] [message]`";
+                + "Usage: `" + getPrefixedName() + " <ping amount | MAX:" + maxPings + "> [person] [message]`";
     }
 }

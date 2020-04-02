@@ -1,7 +1,6 @@
 package coffeecatrailway.catomatic.command.commands.admin;
 
 import coffeecatrailway.catomatic.CommandManager;
-import coffeecatrailway.catomatic.Config;
 import coffeecatrailway.catomatic.command.CommandContext;
 import coffeecatrailway.catomatic.command.ICommand;
 import net.dv8tion.jda.api.Permission;
@@ -19,6 +18,8 @@ import java.util.stream.Collectors;
  * Created: 1/04/2020
  */
 public class PurgeCommand implements ICommand {
+
+    private final int maxPurge = 100, minPurge = 2;
 
     @Override
     public void handle(CommandContext ctx) {
@@ -50,8 +51,8 @@ public class PurgeCommand implements ICommand {
             return;
         }
 
-        if (amount < Integer.parseInt(Config.get("minpurge")) || amount > Integer.parseInt(Config.get("maxpurge"))) {
-            channel.sendMessageFormat("Amount must be at least %s and at most %s", Config.get("minpurge"), Config.get("maxpurge")).queue();
+        if (amount < minPurge || amount > maxPurge) {
+            channel.sendMessageFormat("Amount must be at least %s and at most %s", minPurge, maxPurge).queue();
             return;
         }
 

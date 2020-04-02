@@ -10,7 +10,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nullable;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 /**
@@ -18,6 +21,8 @@ import java.util.regex.Pattern;
  * Created: 30/03/2020
  */
 public class CommandManager {
+
+    public static final String PREFIX = ":c";
 
     public static final Logger LOGGER = LoggerFactory.getLogger(CommandManager.class);
     private final Map<String, ICommand> commands = new HashMap<>();
@@ -71,7 +76,7 @@ public class CommandManager {
 
     void handle(GuildMessageReceivedEvent event) {
         String[] split = event.getMessage().getContentRaw()
-                .replaceFirst("(?i)" + Pattern.quote(Config.get("prefix")), "")
+                .replaceFirst("(?i)" + Pattern.quote(CommandManager.PREFIX), "")
                 .split("\\s+");
         String invoke = split[0].toLowerCase();
 

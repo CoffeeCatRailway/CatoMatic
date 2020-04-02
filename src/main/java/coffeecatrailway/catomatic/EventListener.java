@@ -25,7 +25,7 @@ public class EventListener extends ListenerAdapter {
     @Override
     public void onReady(@Nonnull ReadyEvent event) {
         Presence presence = event.getJDA().getPresence();
-        presence.setActivity(Activity.listening(Config.get("prefix") + "help"));
+        presence.setActivity(Activity.listening(CommandManager.PREFIX + manager.getCommand("help").getName()));
         presence.setStatus(OnlineStatus.ONLINE);
         LOGGER.info("Logged in as {}", event.getJDA().getSelfUser().getAsTag());
     }
@@ -35,7 +35,7 @@ public class EventListener extends ListenerAdapter {
         User user = event.getAuthor();
         if (user.isBot() || event.isWebhookMessage()) return;
 
-        String prefix = Config.get("prefix");
+        String prefix = CommandManager.PREFIX;
         String raw = event.getMessage().getContentRaw();
 
         if (raw.equalsIgnoreCase(prefix + "shutdown") && event.getAuthor().getId().equals(Config.get("owner_id"))) {

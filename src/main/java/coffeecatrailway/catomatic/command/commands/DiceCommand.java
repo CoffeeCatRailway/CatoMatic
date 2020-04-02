@@ -1,7 +1,6 @@
 package coffeecatrailway.catomatic.command.commands;
 
 import coffeecatrailway.catomatic.CommandManager;
-import coffeecatrailway.catomatic.Config;
 import coffeecatrailway.catomatic.command.CommandContext;
 import coffeecatrailway.catomatic.command.ICommand;
 import net.dv8tion.jda.api.entities.TextChannel;
@@ -15,26 +14,36 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class DiceCommand implements ICommand {
 
+    private final int maxSides = 100, minSides = 4, defaultSides = 6;
+    private final int maxDice = 20, minDice = 1;
+
     @Override
     public void handle(CommandContext ctx) {
-        int sides = 6;
-        int dices = 1;
         TextChannel channel = ctx.getChannel();
         List<String> args = ctx.getArgs();
 
+        int sides = defaultSides;
+        int dices = minDice;
         if (!args.isEmpty()) {
             sides = Integer.parseInt(args.get(0));
-
-            if (args.size() > 1)
-                dices = Integer.parseInt(args.get(1));
+            if (args.size() > 1) dices = Integer.parseInt(args.get(1));
         }
 
-        if (sides > Integer.parseInt(Config.get("maxdicesides"))) {
-            channel.sendMessage("The maximum sides is " + Config.get("maxdicesides")).queue();
+        if (sides > maxSides) {
+            channel.sendMessage("The maximum sides is " + maxSides).queue();
             return;
         }
-        if (dices > Integer.parseInt(Config.get("maxdices"))) {
-            channel.sendMessage("The maximum dices is " + Config.get("maxdices")).queue();
+        if (sides < minSides) {
+            channel.sendMessage("The minimum sides is " + minSides).queue();
+            return;
+        }
+
+        if (dices > maxDice) {
+            channel.sendMessage("The maximum dice is " + maxDice).queue();
+            return;
+        }
+        if (sides < minDice) {
+            channel.sendMessage("The minimum dice is " + minDice).queue();
             return;
         }
 

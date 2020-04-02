@@ -1,7 +1,6 @@
 package coffeecatrailway.catomatic.command.commands;
 
 import coffeecatrailway.catomatic.CommandManager;
-import coffeecatrailway.catomatic.Config;
 import coffeecatrailway.catomatic.command.CommandContext;
 import coffeecatrailway.catomatic.command.ICommand;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -68,7 +67,7 @@ public class HelpCommand implements ICommand {
     private EmbedBuilder getCategory(EmbedBuilder embed, HelpCategory category) {
         manager.getCommands().forEach((id, command) -> {
             if (command.getCategory() == category) {
-                embed.appendDescription(Config.get("prefix") + id);
+                embed.appendDescription(CommandManager.PREFIX + id);
                 embed.appendDescription("\n" + command.getHelp());
                 if (!command.getAliases().isEmpty())
                     embed.appendDescription("\n" + getAliases(command));
