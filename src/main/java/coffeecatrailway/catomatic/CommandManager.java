@@ -34,6 +34,7 @@ public class CommandManager {
         addCommand(new CatCommand());
         addCommand(new DogCommand());
         addCommand(new DiceCommand());
+        addCommand(new MemeCommand());
 
         addCommand(new KickCommand());
         addCommand(new BanCommand());
